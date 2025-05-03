@@ -1,5 +1,5 @@
 [app]
-android.build_tools_version = 36.0.0
+android.build_tools_version = 33.0.2
 # (str) Title of your application
 title = TicTacToe
 
@@ -101,7 +101,7 @@ fullscreen = 0
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-#android.api = 31
+android.api = 31
 
 # (int) Minimum API your APK / AAB will support.
 #android.minapi = 21
@@ -122,7 +122,7 @@ fullscreen = 0
 #android.ndk_path =
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path =
+android.sdk_path = $HOME/android-sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
