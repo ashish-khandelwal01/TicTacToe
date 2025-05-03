@@ -20,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          #!/bin/bash
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           sudo apt-get update
@@ -27,6 +28,7 @@ jobs:
 
       - name: Install Buildozer and Android SDK
         run: |
+          #!/bin/bash
           pip install cython
           pip install buildozer
           sudo apt-get install -y python3-dev build-essential
@@ -55,6 +57,7 @@ jobs:
           fi
       - name: Build APK
         run: |
+          #!/bin/bash
           export ANDROID_BUILD_TOOLS_VERSION=33.0.2
           buildozer android debug
 
@@ -78,4 +81,5 @@ jobs:
 
       - name: Deploy APK
         run: |
+          #!/bin/bash
           echo "Deploying APK..."
