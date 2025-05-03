@@ -1,5 +1,5 @@
 [app]
-android.build_tools_version = 33.0.2
+android.build_tools_version = 36.0.0
 # (str) Title of your application
 title = TicTacToe
 
@@ -450,6 +450,7 @@ warn_on_root = 1
 #    Then, invoke the command line with the "demo" profile:
 #
 #buildozer --profile demo android debug
+
 
 
 
