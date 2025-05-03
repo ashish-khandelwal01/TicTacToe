@@ -25,6 +25,7 @@ jobs:
 
       - name: Install Buildozer
         run: |
+          pip install cython
           pip install buildozer
           sudo apt-get install -y python3-dev build-essential
 
