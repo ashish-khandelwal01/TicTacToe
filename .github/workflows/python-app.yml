@@ -1,4 +1,4 @@
-name: Build APP
+name: Build Kivy APK
 
 on: [push]
 
@@ -7,18 +7,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup dependencies
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y python3-pip zip unzip openjdk-17-jdk
+        sudo apt install -y python3-pip zip unzip openjdk-17-jdk python3-setuptools
+        pip install --upgrade Cython virtualenv
         pip install buildozer
+
     - name: Build APK
       run: |
         buildozer init || true
         buildozer android debug
+
     - name: Upload APK
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
-        name: app-debug.apk
+        name: kivy-app-debug
         path: bin/*.apk
