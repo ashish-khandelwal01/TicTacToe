@@ -52,10 +52,10 @@ jobs:
           if [ ! -f "$HOME/android-sdk/build-tools/33.0.2/aidl" ]; then
             echo "AIDL not found, installing..."
             $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "build-tools;33.0.2" || true
-          fi
 
       - name: Build APK
         run: |
+          export ANDROID_BUILD_TOOLS_VERSION=33.0.2
           buildozer android debug
 
       - name: Upload APK as an artifact
@@ -79,4 +79,3 @@ jobs:
       - name: Deploy APK
         run: |
           echo "Deploying APK..."
-
