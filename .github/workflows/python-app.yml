@@ -33,7 +33,7 @@ jobs:
           buildozer android debug
 
       - name: Upload APK as an artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: kivy-apk
           path: /path/to/your/kivy/app/.buildozer/android/platform/build/dists/your_app_name/debug/your_app_name-debug.apk
