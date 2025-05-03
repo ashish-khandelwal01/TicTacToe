@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
       - name: Build APK
@@ -20,3 +23,12 @@ jobs:
         with:
           name: package
           path: ./bin/*.apk
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "Release ${{ github.sha }}"
+          tag_name: "release-${{ github.run_number }}"
+          files: ./bin/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
