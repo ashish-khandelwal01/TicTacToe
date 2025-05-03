@@ -45,13 +45,13 @@ jobs:
           echo "$HOME/android-sdk/platform-tools" >> $GITHUB_PATH
 
           # Accept licenses and install required tools
-          yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses
-          $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-31" "build-tools;33.0.2" "build-tools;36.0.0"
+          yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --install "platform-tools" "platforms;android-31" "build-tools;33.0.2" "build-tools;36.0.0" || true
           
           # Ensure AIDL is installed
           if [ ! -f "$HOME/android-sdk/build-tools/36.0.0/aidl" ]; then
             echo "AIDL not found, installing..."
-            $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "build-tools;36.0.0"
+            $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "build-tools;36.0.0" || true
           fi
 
       - name: Build APK
@@ -79,4 +79,3 @@ jobs:
       - name: Deploy APK
         run: |
           echo "Deploying APK..."
-
