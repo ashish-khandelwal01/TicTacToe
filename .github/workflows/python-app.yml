@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -29,30 +30,31 @@ jobs:
           pip install cython
           pip install buildozer
           sudo apt-get install -y python3-dev build-essential
-
-          # Install SDK Manager and accept licenses
+          
+          # Install Android SDK command line tools
           mkdir -p $HOME/android-sdk/cmdline-tools
           cd $HOME/android-sdk/cmdline-tools
           wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O tools.zip
           unzip tools.zip
           mv cmdline-tools latest
-          export ANDROID_HOME=$HOME/android-sdk
-          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
 
-          yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-31" "build-tools;33.0.2"
+          # Set environment variables for SDK
+          echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
+          echo "PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$HOME/android-sdk/platform-tools:$PATH" >> $GITHUB_ENV
+
+          # Accept licenses and install tools
+          yes | $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          $HOME/android-sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-31" "build-tools;33.0.2"
 
       - name: Build APK
         run: |
-          export ANDROID_HOME=$HOME/android-sdk
-          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
           buildozer android debug
 
       - name: Upload APK as an artifact
         uses: actions/upload-artifact@v4
         with:
           name: kivy-apk
-          path: .buildozer/android/platform/build/dists/your_app_name/build/outputs/apk/debug/your_app_name-debug.apk
+          path: .buildozer/android/platform/build/dists/TicTacToe/build/outputs/apk/debug/TicTacToe-debug.apk
 
   deploy:
     runs-on: ubuntu-latest
@@ -68,5 +70,4 @@ jobs:
 
       - name: Deploy APK
         run: |
-          # Deployment script goes here
           echo "Deploying APK..."
