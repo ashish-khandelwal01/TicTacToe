@@ -1,0 +1,24 @@
+name: Build APP
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y python3-pip zip unzip openjdk-17-jdk
+        pip install buildozer
+    - name: Build APK
+      run: |
+        buildozer init || true
+        buildozer android debug
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-debug.apk
+        path: bin/*.apk
