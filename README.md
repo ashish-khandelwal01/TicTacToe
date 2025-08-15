@@ -17,7 +17,7 @@ TicTacToe is a simple implementation of the classic two-player game built with P
      ```bash
      python -m venv venv
      # On Windows:
-     venv\Scripts\activate
+     .venv\Scripts\activate
      # On macOS/Linux:
      source venv/bin/activate
      ```
