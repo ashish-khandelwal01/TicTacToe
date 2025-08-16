@@ -1,61 +1,95 @@
 <TicTacToeGame>:
-    orientation: 'vertical'
+    orientation: "vertical"
+    spacing: 15
+    padding: 20
+    font_name: "MyFont"
 
     Label:
         id: status_label
-        text: "Player X's turn"
+        text: "🎮 Player X's turn"
         size_hint_y: None
-        height: 40
+        height: 50
         font_size: 24
-        color: 0, 0, 0, 1  # Black text
+        color: 0.2, 0.5, 0.8, 1
+
+    BoxLayout:
+        size_hint_y: None
+        height: 50
+        spacing: 10
+
+        ToggleButton:
+            text: "👥 Players"
+            group: "mode"
+            state: "down"
+            background_color: 0.3, 0.7, 0.3, 1
+            color: 1, 1, 1, 1
+            font_size: 16
+            on_press: root.set_game_mode(self)
+
+        ToggleButton:
+            text: "🤖 Computer"
+            group: "mode"
+            background_color: 0.8, 0.4, 0.4, 1
+            color: 1, 1, 1, 1
+            font_size: 16
+            on_press: root.set_game_mode(self)
 
     GridLayout:
         cols: 3
         spacing: 10
-        padding: [10, 10, 10, 10]
+        padding: 10
 
         Button:
+            id: btn_0
+            font_size: 40
+            background_color: 0.9, 0.95, 1, 1
+            on_press: root.make_move(0)
+        Button:
             id: btn_1
-            font_size: 32
-            background_color: 0.2, 0.6, 0.8, 1
-            color: 1, 1, 1, 1
+            font_size: 40
+            background_color: 0.9, 0.95, 1, 1
+            on_press: root.make_move(1)
         Button:
             id: btn_2
-            font_size: 32
-            background_color: 0.2, 0.6, 0.8, 1
-            color: 1, 1, 1, 1
+            font_size: 40
+            background_color: 0.9, 0.95, 1, 1
+            on_press: root.make_move(2)
         Button:
             id: btn_3
-            font_size: 32
-            background_color: 0.2, 0.6, 0.8, 1
-            color: 1, 1, 1, 1
+            font_size: 40
+            background_color: 0.9, 0.95, 1, 1
+            on_press: root.make_move(3)
         Button:
             id: btn_4
-            font_size: 32
-            background_color: 0.2, 0.6, 0.8, 1
-            color: 1, 1, 1, 1
+            font_size: 40
+            background_color: 0.9, 0.95, 1, 1
+            on_press: root.make_move(4)
         Button:
             id: btn_5
-            font_size: 32
-            background_color: 0.2, 0.6, 0.8, 1
-            color: 1, 1, 1, 1
+            font_size: 40
+            background_color: 0.9, 0.95, 1, 1
+            on_press: root.make_move(5)
         Button:
             id: btn_6
-            font_size: 32
-            background_color: 0.2, 0.6, 0.8, 1
-            color: 1, 1, 1, 1
+            font_size: 40
+            background_color: 0.9, 0.95, 1, 1
+            on_press: root.make_move(6)
         Button:
             id: btn_7
-            font_size: 32
-            background_color: 0.2, 0.6, 0.8, 1
-            color: 1, 1, 1, 1
+            font_size: 40
+            background_color: 0.9, 0.95, 1, 1
+            on_press: root.make_move(7)
         Button:
             id: btn_8
-            font_size: 32
-            background_color: 0.2, 0.6, 0.8, 1
-            color: 1, 1, 1, 1
-        Button:
-            id: btn_9
-            font_size: 32
-            background_color: 0.2, 0.6, 0.8, 1
-            color: 1, 1, 1, 1
+            font_size: 40
+            background_color: 0.9, 0.95, 1, 1
+            on_press: root.make_move(8)
+
+    Button:
+        text: "🔄 New Game"
+        size_hint_y: None
+        height: 50
+        background_color: 0.4, 0.4, 0.8, 1
+        color: 1, 1, 1, 1
+        font_size: 18
+        on_press: root.reset_game()
